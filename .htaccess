@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteBase /practice/
+
+RewriteRule ^workshops\.html$ /practice/workshops/ [R=301]
+RewriteRule ^aboutus\.html$ /practice/actors/ [R=301]
+RewriteRule ^courses\.html$ /practice/courses/ [R=301]
+RewriteRule ^shows\.html$ /practice/shows/ [R=301]
