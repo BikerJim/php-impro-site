@@ -12,7 +12,7 @@
 			ON a2.id = actor2_id
 			LEFT JOIN locations AS l1
 			ON l1.id = location_id
-			WHERE date > now()
+			WHERE date >= CURDATE()
 			ORDER BY date";
 		try {
 			$rows = $db->prepare($query);
