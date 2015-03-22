@@ -9,6 +9,7 @@ require_once(ROOT_PATH . 'inc/header.php');
 
 /* This page is 'protected', meaning that it shouldn't be loaded for 
  * anyone who isn't a registered 'editor' in the Users database
+ * If they're not an Editor they get redirected to the login page.
  */ 
 if (!isEditor($db)) {
 	header('Location: ' . BASE_URL . 'login/');
@@ -24,8 +25,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	/*
 	 * First we collect the POST variables and put them into our own
 	 * variables.
+	 *  
+	 * upload.php does the uploading, sanitisation of the image etc
+	 * and returns a $target_file variable which is the relative path to the uploaded img
 	 */
-		include_once(ROOT_PATH . 'actors/upload.php'); // This script does the uploading stuff and returns a $target_file variable which is the relative path to the uploaded img
+		include_once(ROOT_PATH . 'actors/upload.php');
 		$first_name = htmlspecialchars($_POST["first_name"]);
 		$last_name = htmlspecialchars($_POST["last_name"]);
 		$description = htmlspecialchars($_POST["description"]);
@@ -54,7 +58,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$dataIn->bindValue(':desc', $description);
 			$dataIn->bindValue(':mugshot', $mugshot);		
 			$dataIn->execute();
-
+			/*
+			 * If all this goes well, 'redirect' to this page, actually
+			 * just append a status of 'added' to the url, which the next stage
+			 * checks for.
+			 */
 			header("Location: addrecord.php?status=added");
 			exit;
 			
@@ -102,9 +110,10 @@ if (isset($_GET["status"]) && $_GET["status"] == "added") { ;
 
 	<input type="submit" value="Add actor" name="submit">
 </form>
+<?php } ?>
 <h2>About the mugshots</h2>
 <p>
 	When uploading a new mugshot, you should make sure that you resize the image before uploading it. The CSS will make sure its resized, but its best for everyone if there's no extra bandwidth as far as possible. The image displays at 150(w) x 200(h) pixels, but to make sure they look awesome on reticular screens, which have double the pixel ratio, you should upload a 300x400 image, and the magic of CSS will do the rest.</p>
 	<p>Quality wise, 'save for web' in photoshop is good, or 72dpi is what you're looking for.</p> 
-<?php } ?>
+
 <?php include(ROOT_PATH . 'inc/footer.php') ?>

@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (strlen($description) > 750) {
 		$error_message = "Description is a bit too long, we only need 750 characters.";
 	}
-
+	
 	if (!isset($error_message)) {
 		try {
 				$dataIn = $db->prepare( "	UPDATE actors  SET first_name = :first_name, last_name=:last_name, description=:description, mugshot=:mugshot, display=:display
@@ -59,9 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				echo $e->getMessage();
 			}
 	} else {
-		header('Location:' . BASE_URL . 'actors/editrecord.php?id=' . $id);
-		exit;
-	} 
+		echo $error_message;	
+	}
 } ?>
 
 <?php if (isset($_GET["status"]) && $_GET["status"] == "updated") { 
@@ -81,28 +80,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		echo $e->getMessage();
 	}
 	
-	if (isset($error_message)) {
-		echo $error_message;
-	}
-	
 	?>
 	
 	<table>
 		<tr>
 			<th><label for="first_name">First name</label></th>
-			<td><input type="text" name="first_name" id="first_name" value="<?php echo htmlspecialchars($result["first_name"]); ?>"></td>
+			<td><input type="text" name="first_name" id="first_name" value="<?php if (isset($first_name)) { echo htmlspecialchars($first_name); } else { echo htmlspecialchars($result["first_name"]);} ?>"></td>
 		</tr>
 		<tr>
 			<th><label for="last_name">Last name</label></th>
-			<td><input type="text" name="last_name" id="last_name" value="<?php echo htmlspecialchars($result["last_name"]); ?>"></td>
+			<td><input type="text" name="last_name" id="last_name" value="<?php if (isset($last_name)) { echo htmlspecialchars($last_name); } else { echo htmlspecialchars($result["last_name"]);} ?>"></td>
 		</tr>
 		<tr>
 			<th><label for="description">Description</label></th>
-			<td><textarea name="description" id="description" rows="6" cols="80"><?php echo $result["description"]; ?></textarea></td>
+			<td><textarea name="description" id="description" rows="6" cols="80"><?php if (isset($description)) { echo htmlspecialchars($description); } else { echo htmlspecialchars($result["description"]);} ?></textarea></td>
 		</tr>
 		<tr>
 			<th><label for="mugshot">Mugshot</label></th>
-			<td><img src="<?php echo $result['mugshot']; ?>" alt="mugshot">
+			<td><img src="<?php if (isset($mugshot)) { echo htmlspecialchars($mugshot); } else { echo htmlspecialchars($result["mugshot"]);} ?>" alt="<?php if (isset($mugshot)) { echo htmlspecialchars($first_name) . "'s mugshot"; } else { echo htmlspecialchars($result["mugshot"]);} ?>">
 				<input type="file" name="mugshot" id="mugshot">
 			</td>
 		</tr>
