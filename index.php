@@ -5,6 +5,7 @@ require_once(ROOT_PATH . 'inc/functions.php');
 $pageTitle = "Practice Home Page";
 require_once(ROOT_PATH . 'inc/header.php');
 ?>
+
 <h2>Next Show</h2>
 <?php include(ROOT_PATH . 'inc/snippet_next_show.php'); ?>
 

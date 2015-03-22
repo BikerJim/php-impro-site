@@ -8,6 +8,12 @@ require_once(ROOT_PATH . 'inc/header.php');
 
 <?php
 sec_session_start();
+if (isset($_SERVER["HTTP_REFERER"])) {
+	$referrer = $_SERVER["HTTP_REFERER"];
+} else {
+	$referrer = BASE_URL;
+}
+
  
 if (login_check($db) == true) {
     $logged = 'in';
@@ -28,6 +34,7 @@ if (login_check($db) == true) {
             <input type="button" 
                    value="Login" 
                    onclick="formhash(this.form, this.form.password);" /> 
+            <input type="hidden" name="referrer" value="<?php echo $referrer; ?>">
         </form>
  
 <?php
