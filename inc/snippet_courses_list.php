@@ -14,6 +14,8 @@
 					ON t2.id = teacher2
 					LEFT JOIN locations AS loc
 					ON loc.id = course_location
+					WHERE start_date > DATE_SUB(CURDATE(), INTERVAL '2' WEEK)
+					ORDER BY start_date
 					";
 		try {
 			$rows = $db->prepare($query);
@@ -26,7 +28,7 @@
 	<ul id='courses_list'>
 		<?php 
 		foreach ($results as $result) {
-			if ($result['display'] == 1 || isEditor($db)) {
+			if ( display_result($result) || isEditor($db)) {				
 				echo '<li>';
 				if (isEditor($db)) {
 						echo 
@@ -35,8 +37,14 @@
 					}
 				echo	
 				 '<span class="revealer">' 
-				 . $result['course_title'] . ' ( Starts ' . date('l, jS F ', strtotime($result['start_date'])) 
-				 . ') <em> more info >></em></span>' 
+				 . $result['course_title'] ;
+				if (strtotime($result['start_date']) > strtotime('now')) {
+					echo ' ( Starts ' . date('l, jS F ', strtotime($result['start_date']));
+				} else {
+					echo ' (STARTED';
+				}
+				echo
+				 ') <em> more info >></em></span>' 
 				 . '<div class="course_detail"><p>' . $result['course_description'] . '</p>'
 				 . '<ul class="course_data"><li>Price &euro;' . $result['price'] . '</li>'
 				 . '<li>Every ' . date('l', strtotime($result['start_date'])) . ', ' . $result['time'] . '</li>'

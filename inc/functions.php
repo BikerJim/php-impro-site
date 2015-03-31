@@ -39,7 +39,16 @@ function deleteRecord($db, $table, $id, $redirect) {
 			echo $e->getMessage();
 		}
 }
- 
+
+function display_result($row) {
+	if ($row['display'] == 1){
+		return true;
+	} else {
+		return false;
+	}
+
+} 
+
 function sec_session_start() {
     $session_name = 'sec_session_id';   // Set a custom session name
     $secure = SECURE;
