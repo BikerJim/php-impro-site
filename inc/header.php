@@ -31,7 +31,8 @@ $( "#datepicker" ).datepicker({dateFormat: "yy-mm-dd"});
 		<a href="<?php echo BASE_URL; ?>formats/">Formats</a>
 		<a href="<?php echo BASE_URL; ?>locations/">Locations</a>
 		<a href="<?php echo BASE_URL; ?>inc/logout.php">[Logout]</a>
-<?php if ($_SESSION['iseditor'] == '1') {
+<?php	
+	if ($_SESSION['iseditor'] == '1') {
 		echo '[Editor]'; 
 	 } else {
 		echo '[Guest]';

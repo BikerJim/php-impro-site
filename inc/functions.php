@@ -87,7 +87,6 @@ function login($email, $password, $db) {
  
         // get variables from result.
         $result = $stmt->fetch();
-        
         $user_id = $result['id'];
         $username = $result['username'];
         $db_password = $result['password'];
