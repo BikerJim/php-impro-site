@@ -44,4 +44,3 @@ $( "#datepicker" ).datepicker({dateFormat: "yy-mm-dd"});
 
 	</div>
 </header>
-	<h2><?php echo $pageTitle; ?></h2>

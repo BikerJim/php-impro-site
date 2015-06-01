@@ -70,9 +70,9 @@ if ($result != NULL) {
 	echo 
 			'<tr>
 				<td><img class="showicon" src="formats/img/noshow.png"></td>
-				<td> <h3>No Show Tonight</h3>
+				<td> <h3>We\'re taking a break</h3>
 				<span class="showinfo">
-					<p>There is no show this evening. We\'ll be back soon with more mayhem!</p>
+					<p>There are no shows planned for a while. We\'ll be back soon with more mayhem!</p>
 				</span>
 				</td>
 			</tr>';

@@ -2,7 +2,7 @@
 require_once('inc/config.php'); 
 require_once(ROOT_PATH . 'inc/database.php');
 require_once(ROOT_PATH . 'inc/functions.php');
-$pageTitle = "Practice Home Page";
+$pageTitle = "easylaughs improvised comedy shows, workshops and courses";
 require_once(ROOT_PATH . 'inc/header.php');
 ?>
 
