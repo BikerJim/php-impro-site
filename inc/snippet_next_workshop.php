@@ -27,6 +27,8 @@
 	?>
 	<ul id='next_workshop'>
 <?php 
+if ($result != NULL) {
+
 			echo '<li><h3>' . date('d F, Y' , strtotime($result['date'])) . '</h3> ' . $result['title'] . '<br/> with ' . $result['actor1'] ;
 			if ($result['actor2'] != "") {
 				echo ' and ' . $result['actor2'];
@@ -38,5 +40,8 @@
 					 <a class="button" href="' . BASE_URL . 'workshops/deleterecord.php?id=' . $result["ws_id"] .'"> DELETE </a>';
 				}
 			echo '</li>';
+			} else {
+				echo '<li>There are no workshops planned for a while, check back soon!</li>';			
+			}
 ?>
 	</ul>

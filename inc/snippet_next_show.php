@@ -29,10 +29,12 @@
 			} catch(PDOException $e) {
 				die($e->getMessage());
 		}
-
+		
+		
 	?>
 	<table id='show_list'>
 		<?php 
+if ($result != NULL) {
 			echo 
 			'<tr>
 				<td colspan=2> <h3>' . date('d F, Y' , strtotime($result['date'])) . '</h3>';
@@ -64,5 +66,15 @@
 					<p>' . $result["late_show_info"] . '</p></span>
 				</td>
 			</tr>';
-	 ?>
+} else {
+	echo 
+			'<tr>
+				<td><img class="showicon" src="formats/img/noshow.png"></td>
+				<td> <h3>No Show Tonight</h3>
+				<span class="showinfo">
+					<p>There is no show this evening. We\'ll be back soon with more mayhem!</p>
+				</span>
+				</td>
+			</tr>';
+	} ?>
 	</table>
