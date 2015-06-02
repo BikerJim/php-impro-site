@@ -30,16 +30,13 @@ $( "#datepicker" ).datepicker({dateFormat: "yy-mm-dd"});
 <?php sec_session_start(); 	if (login_check($db) == true) { ?>
 		<a href="<?php echo BASE_URL; ?>formats/">Formats</a>
 		<a href="<?php echo BASE_URL; ?>locations/">Locations</a>
-		<a href="<?php echo BASE_URL; ?>inc/logout.php">[Logout]</a>
 <?php	
 	if ($_SESSION['iseditor'] == '1') {
-		echo '[Editor]'; 
+		echo '[Edit Mode]'; 
 	 } else {
 		echo '[Guest]';
 	 }
 ?>
-<?php } else { ?>
-		<a href="<?php echo BASE_URL; ?>login/">Login</a>
 <?php } ?>
 
 	</div>
